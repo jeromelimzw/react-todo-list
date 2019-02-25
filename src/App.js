@@ -3,6 +3,7 @@ import TodoList from "./TodoList";
 import TodoCreationBar from "./TodoCreationBar";
 import todos from "./seedData";
 import SearchBar from "./SearchBar";
+import _ from 'lodash';
 
 class App extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class App extends Component {
   }
 
   toggleCompleted = tarId => {
-    let nextState = this.state.todos;
+    let nextState =_.cloneDeep(this.state.todos);
     nextState = nextState.map(item => {
       return item.id === tarId
         ? Object.assign({}, item, { isCompleted: !item.isCompleted })
@@ -21,7 +22,7 @@ class App extends Component {
   };
 
   handleDelete = tarId => {
-    let nextState = this.state.todos;
+    let nextState = _.cloneDeep(this.state.todos);
     nextState = nextState.filter(item => {
       return item.id !== tarId;
     });
@@ -30,7 +31,7 @@ class App extends Component {
   };
 
   addTodo = todotext => {
-    let nextState = this.state.todos;
+    let nextState = _.cloneDeep(this.state.todos);
     nextState.push({
       name: todotext,
       isCompleted: false,
