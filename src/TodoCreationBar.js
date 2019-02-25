@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import _ from "lodash";
 
 class TodoCreationBar extends Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class TodoCreationBar extends Component {
   };
 
   addTodo = () => {
-    const trimmedString = this.state.value.trim();
+    const trimmedString = _.cloneDeep(this.state.value.trim());
     if (trimmedString.length !== 0) {
       this.props.addTodo(this.state.value);
       this.setState({ value: "" });
